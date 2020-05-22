@@ -43,7 +43,7 @@ module.exports = (app) => {
     const { workId, commentId } = req.params;
     WorkEffort.findByIdAndUpdate(workId, {
       $pull: { comment: commentId },
-    }).catch((err) => console.error(err));
+    }).catch((err) => res.status(400).json("Error: " + err));
 
     Comment.findByIdAndDelete(commentId)
       .then(() => res.json("Comment deleted"))
